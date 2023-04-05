@@ -28,6 +28,8 @@ public class CardOrderFormTest {
         form.$("label[data-test-id=agreement]").click();
         form.$("button").click();
         $("span.input_invalid[data-test-id=name]").exists();
+        $("span[data-test-id=name] span.input__sub")
+                .shouldHave(text("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
     }
 
     @Test
@@ -39,6 +41,8 @@ public class CardOrderFormTest {
         form.$("label[data-test-id=agreement]").click();
         form.$("button").click();
         $("span.input_invalid[data-test-id=phone]").exists();
+        $("span[data-test-id=phone] span.input__sub")
+                .shouldHave(text("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
 
     @Test
@@ -49,5 +53,29 @@ public class CardOrderFormTest {
         form.$("span[data-test-id=phone] input.input__control[name=phone]").setValue("+79270000000");
         form.$("button").click();
         $("label.input_invalid[data-test-id=agreement]").exists();
+    }
+
+    @Test
+    void shouldShowErrorMsgIfPhoneIsEmpty() {
+        open("http://localhost:9999");
+        SelenideElement form = $("form");
+        form.$("span[data-test-id=name] input.input__control[name=name]").setValue("Василий");
+        form.$("label[data-test-id=agreement]").click();
+        form.$("button").click();
+        $("span.input_invalid[data-test-id=phone]").exists();
+        $("span[data-test-id=phone] span.input__sub")
+                .shouldHave(text("Поле обязательно для заполнения"));
+    }
+
+    @Test
+    void shouldShowErrorMsgIfNameIsEmpty() {
+        open("http://localhost:9999");
+        SelenideElement form = $("form");
+        form.$("span[data-test-id=phone] input.input__control[name=phone]").setValue("+79270000000");
+        form.$("label[data-test-id=agreement]").click();
+        form.$("button").click();
+        $("span.input_invalid[data-test-id=name]").exists();
+        $("span[data-test-id=name] span.input__sub")
+                .shouldHave(text("Поле обязательно для заполнения"));
     }
 }
