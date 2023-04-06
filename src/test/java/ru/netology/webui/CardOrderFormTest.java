@@ -28,7 +28,7 @@ public class CardOrderFormTest {
         form.$("label[data-test-id=agreement]").click();
         form.$("button").click();
         $("span.input_invalid[data-test-id=name]").exists();
-        $("span[data-test-id=name] span.input__sub")
+        $("span[data-test-id=name].input_invalid span.input__sub")
                 .shouldHave(text("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
     }
 
@@ -41,7 +41,7 @@ public class CardOrderFormTest {
         form.$("label[data-test-id=agreement]").click();
         form.$("button").click();
         $("span.input_invalid[data-test-id=phone]").exists();
-        $("span[data-test-id=phone] span.input__sub")
+        $("span[data-test-id=phone].input_invalid span.input__sub")
                 .shouldHave(text("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
 
@@ -63,7 +63,7 @@ public class CardOrderFormTest {
         form.$("label[data-test-id=agreement]").click();
         form.$("button").click();
         $("span.input_invalid[data-test-id=phone]").exists();
-        $("span[data-test-id=phone] span.input__sub")
+        $("span[data-test-id=phone].input_invalid span.input__sub")
                 .shouldHave(text("Поле обязательно для заполнения"));
     }
 
@@ -75,7 +75,7 @@ public class CardOrderFormTest {
         form.$("label[data-test-id=agreement]").click();
         form.$("button").click();
         $("span.input_invalid[data-test-id=name]").exists();
-        $("span[data-test-id=name] span.input__sub")
+        $("span[data-test-id=name].input_invalid span.input__sub")
                 .shouldHave(text("Поле обязательно для заполнения"));
     }
 }
